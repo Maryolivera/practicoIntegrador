@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+ 
+  <title>Juego de Países</title>
+  <link rel="stylesheet" href="styles.css" /> 
+  <script src="script.js"> </script>
+
+</head>
+<body>
+   
+ 
+ <div class="pantalla" id="pantalla-inicio" style="display:flex;">
+  <div class="cuadro">
+    <h1>¡Bienvenidos!</h1>
+    <p>Vamos a jugar y aprender sobre los países del mundo</p>
+    <button onclick="jugar()">Comenzar</button>
+  </div>
+</div>
+
+<div class="pantalla" id="pantalla-juego">
+  <div class="cuadro">
+    <div class="info-superior">
+      <span id="progreso">🟡 Pregunta 1 de 10</span>
+    </div>
+
+    <h2 id="pregunta"></h2>
+    <div class="opciones"></div>
+    
+    <div id="respuesta"></div> 
+  </div>
+</div>
+
+
+
+<div class="pantalla" id="pantalla-resultados">
+  <div class="cuadro">
+    <h2> Resultados de la partida</h2>
+    <p>✅ Correctas: <span id="resultado-correctas">0</span></p>
+    <p>❌ Incorrectas: <span id="resultado-incorrectas">0</span></p>
+    <p>⏱️ Tiempo total: <span id="resultado-tiempo-total">0</span> segundos</p>
+    <p>📊 Tiempo promedio: <span id="resultado-tiempo-promedio">0</span> segundos</p>
+
+    <div class="botones">
+      <button onclick="mostrarRanking()">Ver ranking</button>
+      <button onclick="reiniciarJuego()">Volver a jugar</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
