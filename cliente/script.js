@@ -45,17 +45,86 @@ async function cargarPaises() {
     const tipo = Math.floor(Math.random() * 3); 
   
     if (tipo === 0) {
-      mostrarPreguntaCapital();
+      preguntaCapital();
     } else if (tipo === 1) {
-      
-      mostrarPreguntaBandera(); 
+      preguntaCapital();
+     
     } else {
+      preguntaCapital();
       
-      mostrarPreguntaLimitrofes(); 
     }
   }
 
 
+  function preguntaCapital() { 
+    let pais;
+    do {
+      pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
+    } while (!pais.capital || pais.capital.length === 0);
+
+    console.log("País elegido:", pais);
+
+
+    const nombrePais = pais.name.common;
+    const capitalCorrecta = pais.capital[0];
   
+    const opciones = [capitalCorrecta, ...opcionesIncorrectas(capitalCorrecta, "capital", 3)];
+    const mezcladas = opciones.sort(() => Math.random() - 0.5);
+  
+    document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
+    document.getElementById("pregunta").textContent = `¿Cuál es la capital de ${nombrePais}?`;
+  
+    mostrarOpciones(mezcladas, capitalCorrecta);
+    numeroPregunta++;
+    
+  }
+
+
+  function opcionesIncorrectas(correcta, campo, cantidad) {
+    const opciones = [];
+    let valor;
+  
+    while (opciones.length < cantidad) {
+      const pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
+    if (campo === "capital") {
+      if (pais.capital && pais.capital.length > 0) {
+        valor = pais.capital[0];
+      } else {
+        valor = "Sin capital";
+      }
+    } else {
+      valor = pais.name.common;
+    }
+  
+     
+      if (
+        valor &&
+        valor !== correcta &&
+        !opciones.includes(valor)
+      ) {
+        opciones.push(valor);
+      }
+    }
+  
+    return opciones;
+  }
+
+  function mostrarOpciones(opciones, correcta) {
+    const contenedor = document.querySelector(".opciones");
+    contenedor.innerHTML = "";
+  
+    opciones.forEach(opcion => {
+      const boton = document.createElement("button");
+      boton.textContent = opcion;
+      boton.onclick = () => responder(opcion === correcta, correcta);
+      contenedor.appendChild(boton);
+    });
+  }
+  
+  
+
+
+
+ 
 
   
