@@ -121,6 +121,23 @@ async function cargarPaises() {
     });
   }
   
+  function responder(esCorrecta,correcta) {
+    const respuesta = document.getElementById("respuesta");
+  
+    if (esCorrecta) {
+      respuesta.textContent = "✅ ¡Correcto!";
+      correctas++;
+    } else {
+      respuesta.textContent = `❌ Incorrecto. La respuesta era: ${correcta}`;
+      incorrectas++;
+    }
+  
+    numeroPregunta++;
+    setTimeout(() => {
+      respuesta.textContent = ""; 
+      mostrarPregunta();
+    }, 3000);
+  }
   
 
 
