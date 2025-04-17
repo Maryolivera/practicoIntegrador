@@ -6,7 +6,7 @@ let numeroPregunta = 1;
 const totalPreguntas = 10;
 
 
-async function cargarPaises() {
+ async function cargarPaises() {
     try {
       const respuesta = await fetch("https://restcountries.com/v3.1/all");
       const datos = await respuesta.json();
@@ -38,7 +38,7 @@ async function cargarPaises() {
 
   function mostrarPregunta() {
     if (numeroPregunta > totalPreguntas) {
-      mostrarPantallaResultados();
+      PantallaResultados();
       return;
     }
   
@@ -120,6 +120,7 @@ async function cargarPaises() {
       contenedor.appendChild(boton);
     });
   }
+
   
   function responder(esCorrecta,correcta) {
     const respuesta = document.getElementById("respuesta");
@@ -139,9 +140,24 @@ async function cargarPaises() {
     }, 3000);
   }
   
-
-
-
+  function PantallaResultados() {
+    const tiempoFinal = Date.now();
+    const tiempoTotal = Math.floor((tiempoFinal - tiempoInicio) / 1000);
+    const promedio = (tiempoTotal / totalPreguntas).toFixed(1);
+  
+    document.getElementById("resultado-correctas").textContent = correctas;
+    document.getElementById("resultado-incorrectas").textContent = incorrectas;
+    document.getElementById("resultado-tiempo-total").textContent = tiempoTotal;
+    document.getElementById("resultado-tiempo-promedio").textContent = promedio;
+  
+    document.getElementById("pantalla-juego").style.display = "none";
+    document.getElementById("pantalla-resultados").style.display = "flex";
+  }
+  
+ 
+  function reiniciarJuego() {
+    jugar();
+  }
  
 
   
