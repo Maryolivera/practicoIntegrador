@@ -38,7 +38,7 @@ const totalPreguntas = 10;
 
   function mostrarPregunta() {
     if (numeroPregunta > totalPreguntas) {
-      PantallaResultados();
+      pantallaResultados();
       return;
     }
   
@@ -47,7 +47,7 @@ const totalPreguntas = 10;
     if (tipo === 0) {
       preguntaCapital();
     } else if (tipo === 1) {
-      preguntaCapital();
+      preguntaBandera();
      
     } else {
       preguntaCapital();
@@ -62,7 +62,7 @@ const totalPreguntas = 10;
       pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
     } while (!pais.capital || pais.capital.length === 0);
 
-    console.log("País elegido:", pais);
+   
 
 
     const nombrePais = pais.name.common;
@@ -75,9 +75,22 @@ const totalPreguntas = 10;
     document.getElementById("pregunta").textContent = `¿Cuál es la capital de ${nombrePais}?`;
   
     mostrarOpciones(mezcladas, capitalCorrecta);
-    numeroPregunta++;
     
   }
+
+
+  function preguntaBandera() {
+    const pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
+    const nombrePais = pais.name.common;
+    const opciones = [nombrePais, ...opcionesIncorrectas(nombrePais, "nombre", 3)];
+    const mezcladas = opciones.sort(() => Math.random() - 0.5);
+  
+    document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
+    document.getElementById("pregunta").innerHTML = `¿Qué país representa esta bandera?<br><img src="${pais.flags.svg}" alt="Bandera" style="width: 100px;">`;
+    mostrarOpciones(mezcladas, nombreCorrecto);
+    
+  }
+
 
 
   function opcionesIncorrectas(correcta, campo, cantidad) {
@@ -140,7 +153,7 @@ const totalPreguntas = 10;
     }, 3000);
   }
   
-  function PantallaResultados() {
+  function pantallaResultados() {
     const tiempoFinal = Date.now();
     const tiempoTotal = Math.floor((tiempoFinal - tiempoInicio) / 1000);
     const promedio = (tiempoTotal / totalPreguntas).toFixed(1);
