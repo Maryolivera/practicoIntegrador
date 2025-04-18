@@ -1,4 +1,8 @@
 let listaPaises=[];
+let paisesConCapital = [];
+let paisesConBandera = [];
+let paisesConFronteras = [];
+
 let correctas = 0;
 let incorrectas = 0;
 let tiempoInicio;
@@ -11,6 +15,11 @@ const totalPreguntas = 10;
       const respuesta = await fetch("https://restcountries.com/v3.1/all");
       const datos = await respuesta.json();
       listaPaises = datos;
+
+      paisesConCapital = listaPaises.filter(p => p.capital && p.capital.length > 0);
+      paisesConBandera = listaPaises.filter(p => p.flags && p.flags.svg);
+      paisesConFronteras = listaPaises.filter(p => p.borders && p.borders.length > 0);
+    
       
     } catch (error) {
       console.error("Error al cargar países:", error);
@@ -50,18 +59,16 @@ const totalPreguntas = 10;
       preguntaBandera();
      
     } else {
-      preguntaCapital();
+      preguntaLimitrofes();
       
     }
   }
 
 
   function preguntaCapital() { 
-    let pais;
-    do {
-      pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
-    } while (!pais.capital || pais.capital.length === 0);
-
+    
+    
+    const pais = paisesConCapital[Math.floor(Math.random() * paisesConCapital.length)];
    
 
 
@@ -80,15 +87,40 @@ const totalPreguntas = 10;
 
 
   function preguntaBandera() {
-    const pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
+    
+   
+    const pais = paisesConBandera[Math.floor(Math.random() * paisesConBandera.length)];
     const nombrePais = pais.name.common;
     const opciones = [nombrePais, ...opcionesIncorrectas(nombrePais, "nombre", 3)];
     const mezcladas = opciones.sort(() => Math.random() - 0.5);
   
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
     document.getElementById("pregunta").innerHTML = `¿Qué país representa esta bandera?<br><img src="${pais.flags.svg}" alt="Bandera" style="width: 100px;">`;
-    mostrarOpciones(mezcladas, nombreCorrecto);
+    mostrarOpciones(mezcladas, nombrePais);
     
+  }
+
+  function preguntaLimitrofes() {
+    
+   
+    const pais = paisesConFronteras[Math.floor(Math.random() * paisesConFronteras.length)];
+    const nombrePais = pais.name.common;
+    const cantidadCorrecta = pais.borders.length;
+  
+    const opciones = [cantidadCorrecta];
+    while (opciones.length < 4) {
+      const aux = paisesConFronteras[Math.floor(Math.random() * paisesConFronteras.length)];
+      const cantidad = aux.borders.length;
+      if (!opciones.includes(cantidad)) {
+        opciones.push(cantidad);
+      }
+    }
+  
+    const mezcladas = opciones.sort(() => Math.random() - 0.5);
+    document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
+    document.getElementById("pregunta").textContent = `¿Cuántos países limítrofes tiene ${nombrePais}?`;
+  
+    mostrarOpciones(mezcladas, cantidadCorrecta);
   }
 
 
@@ -147,6 +179,7 @@ const totalPreguntas = 10;
     }
   
     numeroPregunta++;
+    
     setTimeout(() => {
       respuesta.textContent = ""; 
       mostrarPregunta();
@@ -171,6 +204,4 @@ const totalPreguntas = 10;
   function reiniciarJuego() {
     jugar();
   }
- 
 
-  
