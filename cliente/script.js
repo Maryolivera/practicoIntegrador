@@ -7,6 +7,7 @@ let correctas = 0;
 let incorrectas = 0;
 let tiempoInicio;
 let numeroPregunta = 1;
+let puntajeTotal=0;
 const totalPreguntas = 10;
 
 
@@ -36,6 +37,7 @@ const totalPreguntas = 10;
     correctas = 0;
     incorrectas = 0;
     numeroPregunta = 1;
+    puntajeTotal=0;
     tiempoInicio = Date.now();
   
     await cargarPaises(); 
@@ -81,7 +83,7 @@ const totalPreguntas = 10;
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
     document.getElementById("pregunta").textContent = `¿Cuál es la capital de ${nombrePais}?`;
   
-    mostrarOpciones(mezcladas, capitalCorrecta);
+    mostrarOpciones(mezcladas, capitalCorrecta,3);
     
   }
 
@@ -96,7 +98,7 @@ const totalPreguntas = 10;
   
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
     document.getElementById("pregunta").innerHTML = `¿Qué país representa esta bandera?<br><img src="${pais.flags.svg}" alt="Bandera" style="width: 100px;">`;
-    mostrarOpciones(mezcladas, nombrePais);
+    mostrarOpciones(mezcladas, nombrePais,5);
     
   }
 
@@ -120,7 +122,7 @@ const totalPreguntas = 10;
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
     document.getElementById("pregunta").textContent = `¿Cuántos países limítrofes tiene ${nombrePais}?`;
   
-    mostrarOpciones(mezcladas, cantidadCorrecta);
+    mostrarOpciones(mezcladas, cantidadCorrecta,3);
   }
 
 
@@ -154,25 +156,27 @@ const totalPreguntas = 10;
     return opciones;
   }
 
-  function mostrarOpciones(opciones, correcta) {
+  function mostrarOpciones(opciones, correcta,valorPuntaje=0) {
     const contenedor = document.querySelector(".opciones");
     contenedor.innerHTML = "";
   
     opciones.forEach(opcion => {
       const boton = document.createElement("button");
       boton.textContent = opcion;
-      boton.onclick = () => responder(opcion === correcta, correcta);
+      boton.onclick = () => responder(opcion === correcta, correcta,valorPuntaje);
       contenedor.appendChild(boton);
     });
   }
 
   
-  function responder(esCorrecta,correcta) {
+  function responder(esCorrecta,correcta,valorPuntaje=0) {
     const respuesta = document.getElementById("respuesta");
   
     if (esCorrecta) {
       respuesta.textContent = "✅ ¡Correcto!";
       correctas++;
+      puntajeTotal += valorPuntaje;
+
     } else {
       respuesta.textContent = `❌ Incorrecto. La respuesta era: ${correcta}`;
       incorrectas++;
@@ -195,6 +199,7 @@ const totalPreguntas = 10;
     document.getElementById("resultado-incorrectas").textContent = incorrectas;
     document.getElementById("resultado-tiempo-total").textContent = tiempoTotal;
     document.getElementById("resultado-tiempo-promedio").textContent = promedio;
+    document.getElementById("resultado-puntaje-total").textContent = puntajeTotal;
   
     document.getElementById("pantalla-juego").style.display = "none";
     document.getElementById("pantalla-resultados").style.display = "flex";
