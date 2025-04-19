@@ -77,7 +77,15 @@ const totalPreguntas = 10;
     const nombrePais = pais.name.common;
     const capitalCorrecta = pais.capital[0];
   
-    const opciones = [capitalCorrecta, ...opcionesIncorrectas(capitalCorrecta, "capital", 3)];
+    const opciones = [capitalCorrecta];
+    while (opciones.length < 4) {
+      const aux = paisesConCapital[Math.floor(Math.random() * paisesConCapital.length)];
+      const valor=aux.capital[0];
+      if (!opciones.includes(valor)) {
+        opciones.push(valor);
+      }
+    }
+
     const mezcladas = opciones.sort(() => Math.random() - 0.5);
   
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
@@ -93,7 +101,17 @@ const totalPreguntas = 10;
    
     const pais = paisesConBandera[Math.floor(Math.random() * paisesConBandera.length)];
     const nombrePais = pais.name.common;
-    const opciones = [nombrePais, ...opcionesIncorrectas(nombrePais, "nombre", 3)];
+    const opciones = [nombrePais];
+
+    while (opciones.length < 4) {
+      const aux = paisesConBandera[Math.floor(Math.random() * paisesConBandera.length)]
+      const valor=aux.name.common;
+      if (!opciones.includes(valor)) {
+        opciones.push(valor);
+      }
+    }
+
+
     const mezcladas = opciones.sort(() => Math.random() - 0.5);
   
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
@@ -106,7 +124,7 @@ const totalPreguntas = 10;
     
    
     const pais = paisesConFronteras[Math.floor(Math.random() * paisesConFronteras.length)];
-    const nombrePais = pais.name.common;
+    
     const cantidadCorrecta = pais.borders.length;
   
     const opciones = [cantidadCorrecta];
@@ -120,41 +138,14 @@ const totalPreguntas = 10;
   
     const mezcladas = opciones.sort(() => Math.random() - 0.5);
     document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
-    document.getElementById("pregunta").textContent = `¿Cuántos países limítrofes tiene ${nombrePais}?`;
+    document.getElementById("pregunta").textContent = `¿Cuántos países limítrofes tiene ${pais.name.common}?`;
   
     mostrarOpciones(mezcladas, cantidadCorrecta,3);
   }
 
 
 
-  function opcionesIncorrectas(correcta, campo, cantidad) {
-    const opciones = [];
-    let valor;
   
-    while (opciones.length < cantidad) {
-      const pais = listaPaises[Math.floor(Math.random() * listaPaises.length)];
-    if (campo === "capital") {
-      if (pais.capital && pais.capital.length > 0) {
-        valor = pais.capital[0];
-      } else {
-        valor = "Sin capital";
-      }
-    } else {
-      valor = pais.name.common;
-    }
-  
-     
-      if (
-        valor &&
-        valor !== correcta &&
-        !opciones.includes(valor)
-      ) {
-        opciones.push(valor);
-      }
-    }
-  
-    return opciones;
-  }
 
   function mostrarOpciones(opciones, correcta,valorPuntaje=0) {
     const contenedor = document.querySelector(".opciones");
