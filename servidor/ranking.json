@@ -58,5 +58,10 @@
     "puntaje": 3,
     "correctas": 1,
     "tiempo": 15
+  },
+  {
+    "puntaje": 11,
+    "correctas": 3,
+    "tiempo": 49
   }
 ]
