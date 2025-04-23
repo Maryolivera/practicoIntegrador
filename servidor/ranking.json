@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "puntaje": 19,
+    "correctas": 5,
+    "tiempo": 7
+  },
+  {
+    "puntaje": 9,
+    "correctas": 3,
+    "tiempo": 42
+  },
+  {
+    "puntaje": 13,
+    "correctas": 3,
+    "tiempo": 36
+  },
+  {
+    "puntaje": 3,
+    "correctas": 1,
+    "tiempo": 17
+  },
+  {
+    "puntaje": 15,
+    "correctas": 3,
+    "tiempo": 53
+  },
+  {
+    "puntaje": 9,
+    "correctas": 3,
+    "tiempo": 14
+  },
+  {
+    "puntaje": 6,
+    "correctas": 2,
+    "tiempo": 25
+  },
+  {
+    "puntaje": 10,
+    "correctas": 2,
+    "tiempo": 20
+  },
+  {
+    "puntaje": 16,
+    "correctas": 4,
+    "tiempo": 38
+  },
+  {
+    "puntaje": 15,
+    "correctas": 3,
+    "tiempo": 45
+  },
+  {
+    "puntaje": 11,
+    "correctas": 3,
+    "tiempo": 45
+  },
+  {
+    "puntaje": 3,
+    "correctas": 1,
+    "tiempo": 15
+  }
+]

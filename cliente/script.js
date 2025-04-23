@@ -177,7 +177,13 @@ const totalPreguntas = 10;
     
     setTimeout(() => {
       respuesta.textContent = ""; 
-      mostrarPregunta();
+      if (numeroPregunta > totalPreguntas) {
+        
+        pantallaResultados();
+      } else {
+        
+        mostrarPregunta();
+      }
     }, 3000);
   }
   
@@ -194,10 +200,28 @@ const totalPreguntas = 10;
   
     document.getElementById("pantalla-juego").style.display = "none";
     document.getElementById("pantalla-resultados").style.display = "flex";
+
+    
+  
+    enviarResultados(puntajeTotal,correctas,tiempoTotal);
   }
+
+  function enviarResultados(puntaje, correctas, tiempo) {
+    fetch('http://localhost:3000/guardarResultados', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ puntaje, correctas, tiempo })
+    });
+  }
+  
+
+
   
  
   function reiniciarJuego() {
+   
     jugar();
   }
+
+
 
