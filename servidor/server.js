@@ -41,7 +41,7 @@ function ordenarRanking() {
     .slice(0, 20)
 
   const rankingTiempo = [...rankingCompleto]
-    .sort((a, b) => a.duracionTotal - b.duracionTotal)
+    .sort((a, b) => a.tiempoTotal - b.tiempoTotal)
     .slice(0, 20)
 
   return { rankingPuntaje, rankingAciertos, rankingTiempo }

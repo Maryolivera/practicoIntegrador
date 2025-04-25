@@ -6,9 +6,10 @@ let paisesConFronteras = [];
 let correctas = 0;
 let incorrectas = 0;
 let tiempoInicio;
+let tiempoTotal=0;
 let numeroPregunta = 1;
 let puntajeTotal=0;
-const totalPreguntas = 10;
+const totalPreguntas = 4;
 
 
  async function cargarPaises() {
@@ -39,6 +40,7 @@ const totalPreguntas = 10;
     numeroPregunta = 1;
     puntajeTotal=0;
     tiempoInicio = Date.now();
+    tiempoTotal=Date.now();
   
     await cargarPaises(); 
   
@@ -184,13 +186,15 @@ const totalPreguntas = 10;
         
         mostrarPregunta();
       }
-    }, 3000);
+    }, 1500);
   }
   
   function pantallaResultados() {
     const tiempoFinal = Date.now();
-    const tiempoTotal = Math.floor((tiempoFinal - tiempoInicio) / 1000);
+    
     const promedio = (tiempoTotal / totalPreguntas).toFixed(1);
+
+    tiempoTotal = Math.floor((tiempoFinal - tiempoInicio) / 1000); 
   
     document.getElementById("resultado-correctas").textContent = correctas;
     document.getElementById("resultado-incorrectas").textContent = incorrectas;
@@ -203,18 +207,57 @@ const totalPreguntas = 10;
 
     
   
-    enviarResultados(puntajeTotal,correctas,tiempoTotal);
   }
 
-  function enviarResultados(puntaje, correctas, tiempo) {
-    fetch('http://localhost:3000/guardarResultados', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ puntaje, correctas, tiempo })
-    });
+  
+  
+  async function mostrarRanking() {
+    console.log('🔍 mostrarRanking ● datos a enviar:', { puntajeTotal, correctas, tiempoTotal });
+
+    try {
+      await fetch('http://localhost:3000/guardarResultados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ puntajeTotal, correctas, tiempoTotal })
+      });
+  
+      const res = await fetch('http://localhost:3000/rankings');
+      const data = await res.json();
+  
+      document.querySelectorAll('.pantalla').forEach(div => {
+        div.style.display = 'none';
+      });
+  
+      document.getElementById("pantalla-ranking").style.display = "flex";
+  
+      document.getElementById('rankingPuntaje').innerHTML = '';
+      document.getElementById('rankingAciertos').innerHTML = '';
+      document.getElementById('rankingTiempo').innerHTML = '';
+  
+      data.rankingPuntaje.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.textContent = `#${i + 1} - Puntaje: ${item.puntajeTotal}, Aciertos: ${item.correctas}, Tiempo: ${item.tiempoTotal}s`;
+        document.getElementById('rankingPuntaje').appendChild(li);
+      });
+  
+      data.rankingAciertos.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.textContent = `#${i + 1} - Aciertos: ${item.correctas}, Puntaje: ${item.puntajeTotal}, Tiempo: ${item.tiempoTotal}s`;
+        document.getElementById('rankingAciertos').appendChild(li);
+      });
+  
+      data.rankingTiempo.forEach((item, i) => {
+        const li = document.createElement('li');
+        li.textContent = `#${i + 1} - Tiempo: ${item.tiempoTotal}s, Puntaje: ${item.puntajeTotal}, Aciertos: ${item.correctas}`;
+        document.getElementById('rankingTiempo').appendChild(li);
+      });
+  
+    } catch (error) {
+      console.error('Error en mostrarRanking:', error);
+      alert('Ocurrió un error al guardar o cargar el ranking.');
+    }
   }
   
-
 
   
  
