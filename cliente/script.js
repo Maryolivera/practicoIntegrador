@@ -14,7 +14,10 @@ const totalPreguntas = 4;
 
  async function cargarPaises() {
     try {
-      const respuesta = await fetch("https://restcountries.com/v3.1/all");
+      //const respuesta = await fetch("https://restcountries.com/v3.1/all");
+      const respuesta = await fetch("/api/paises");
+
+      
       const datos = await respuesta.json();
       listaPaises = datos;
 

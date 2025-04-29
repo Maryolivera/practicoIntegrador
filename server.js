@@ -2,6 +2,10 @@ const express = require('express')
 const cors    = require('cors')
 const fs      = require('fs')
 const path = require('path');
+const fetch = require('node-fetch');
+
+
+
 
 
 
@@ -58,6 +62,18 @@ function ordenarRanking() {
 }
 
 app.use(express.static(path.join(__dirname, 'cliente')));
+
+app.get('/api/paises', async (req, res) => {
+  try {
+    const respuesta = await fetch('https://restcountries.com/v3.1/all');
+    const datos = await respuesta.json();
+    res.json(datos);
+  } catch (error) {
+    console.error('Error al obtener países:', error);
+    res.status(500).json({ error: 'Error al obtener datos de países' });
+  }
+});
+
 
 
 

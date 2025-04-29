@@ -23,5 +23,15 @@
     "puntajeTotal": 0,
     "correctas": 0,
     "tiempoTotal": 12
+  },
+  {
+    "puntajeTotal": 0,
+    "correctas": 0,
+    "tiempoTotal": 10
+  },
+  {
+    "puntajeTotal": 3,
+    "correctas": 1,
+    "tiempoTotal": 16
   }
 ]
