@@ -215,14 +215,18 @@ const totalPreguntas = 4;
     console.log('🔍 mostrarRanking ● datos a enviar:', { puntajeTotal, correctas, tiempoTotal });
 
     try {
-      await fetch('http://localhost:3000/guardarResultados', {
+    
+      await fetch('guardarResultados', {
+     
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ puntajeTotal, correctas, tiempoTotal })
       });
   
-      const res = await fetch('http://localhost:3000/rankings');
-      const data = await res.json();
+      
+     const res = await fetch('rankings');  
+     
+     const data = await res.json();
   
       document.querySelectorAll('.pantalla').forEach(div => {
         div.style.display = 'none';
