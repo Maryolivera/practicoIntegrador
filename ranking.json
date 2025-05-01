@@ -33,5 +33,10 @@
     "puntajeTotal": 3,
     "correctas": 1,
     "tiempoTotal": 16
+  },
+  {
+    "puntajeTotal": 6,
+    "correctas": 2,
+    "tiempoTotal": 0
   }
 ]

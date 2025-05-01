@@ -1,82 +1,80 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html, body {
-    height: 100%;
-    font-family: sans-serif;
-  }
-  
-  
-  .pantalla {
-    background: linear-gradient(to bottom, #a0d8ef, #e0f7fa);
-    height: 100vh;
-    width: 100vw;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  /*  Cuadro central común a todas las pantallas */
-  .cuadro {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  
-  .cuadro h1, .cuadro h2 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #333;
-  }
-  
-  .cuadro p {
-    margin: 10px 0;
-    font-size: 1.1em;
-  }
-  
-  .botones, .opciones {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .botones, .respuesta{
-    margin-top: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-  }
-  
-  
-  
-  button {
-    background: #007bff;
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #0056b3;
-  }
-  
-  
-  .info-superior {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.pantalla {
+  background: linear-gradient(to bottom, #a0d8ef, #e0f7fa);
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/*  Cuadro central común a todas las pantallas */
+.cuadro {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cuadro h1,
+.cuadro h2 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.cuadro p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.botones,
+.opciones {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.botones,
+.respuesta {
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.info-superior {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
