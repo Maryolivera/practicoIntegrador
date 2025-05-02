@@ -11,6 +11,8 @@ let tiempoTotal ;
 let numeroPregunta = 1;
 let puntajeTotal = 0;
 const totalPreguntas = 4;
+let nombreJugador = "";
+
 
 //Carga la lista completa de paises desde la API y filtra por categorias
 async function cargarPaises() {
@@ -29,6 +31,12 @@ async function cargarPaises() {
 
 //Inicializa y comienza el juego
 async function jugar() {
+  nombreJugador = document.getElementById('nombreJugador').value.trim();
+  if (nombreJugador === "") {
+    alert("Por favor, ingresa tu nombre antes de comenzar.");
+    return;
+  }
+
   document.getElementById("pantalla-inicio").style.display = "none";
   document.getElementById("pantalla-resultados").style.display = "none";
   document.getElementById("pantalla-juego").style.display = "flex";
@@ -163,12 +171,12 @@ function pantallaResultados() {
 
 //Guarda los resultados y muestra el ranking 
 async function mostrarRanking() {
-  console.log('🔍 mostrarRanking ● datos a enviar:', { puntajeTotal, correctas, tiempoTotal });
+  console.log('🔍 mostrarRanking ● datos a enviar:', {nombreJugador, puntajeTotal, correctas, tiempoTotal });
   try {
     await fetch('guardarResultados', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ puntajeTotal, correctas, tiempoTotal })
+      body: JSON.stringify({nombreJugador, puntajeTotal, correctas, tiempoTotal })
     });
     const res = await fetch('rankings');
     const data = await res.json();
@@ -181,19 +189,19 @@ async function mostrarRanking() {
     document.getElementById('rankingTiempo').innerHTML = '';
     data.rankingPuntaje.forEach((item, i) => {
       const li = document.createElement('li');
-      li.textContent = `#${i + 1} - Puntaje: ${item.puntajeTotal}, Aciertos: ${item.correctas}, Tiempo: ${item.tiempoTotal}s`;
+      li.textContent = `#${i + 1} ${item.nombreJugador} : ${item.puntajeTotal}`;
       document.getElementById('rankingPuntaje').appendChild(li);
     });
 
     data.rankingAciertos.forEach((item, i) => {
       const li = document.createElement('li');
-      li.textContent = `#${i + 1} - Aciertos: ${item.correctas}, Puntaje: ${item.puntajeTotal}, Tiempo: ${item.tiempoTotal}s`;
+      li.textContent = `#${i + 1} ${item.nombreJugador} : ${item.correctas}`;
       document.getElementById('rankingAciertos').appendChild(li);
     });
 
     data.rankingTiempo.forEach((item, i) => {
       const li = document.createElement('li');
-      li.textContent = `#${i + 1} - Tiempo: ${item.tiempoTotal}s, Puntaje: ${item.puntajeTotal}, Aciertos: ${item.correctas}`;
+      li.textContent = `#${i + 1}  ${item.nombreJugador} : ${item.tiempoTotal}s`;
       document.getElementById('rankingTiempo').appendChild(li);
     });
 

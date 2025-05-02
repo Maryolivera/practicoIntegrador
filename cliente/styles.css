@@ -78,3 +78,43 @@ button:hover {
   font-weight: bold;
   color: #333;
 }
+
+.columnas {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.columnas div {
+  flex: 1;
+}
+
+.columnas ul {
+  list-style: none;
+  padding: 0;
+}
+
+.columnas li {
+  padding: 6px 8px;
+  margin-bottom: 6px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  display: flex; 
+  justify-content: space-between; 
+}
+
+.columnas h3 {
+  text-align: center;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .columnas {
+    flex-direction: column;
+  }
+}
+

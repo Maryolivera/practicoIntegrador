@@ -6,12 +6,16 @@
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
-  
+
   <body>
     <div class="pantalla" id="pantalla-inicio" style="display: flex">
       <div class="cuadro">
         <h1>¡Bienvenidos!</h1>
         <p>Vamos a jugar y aprender sobre los países del mundo</p>
+
+        <label for="nombreJugador">Ingresa tu nombre:</label>
+        <input type="text" id="nombreJugador" placeholder="Tu nombre aquí" />
+
         <button onclick="jugar()">Comenzar</button>
       </div>
     </div>
@@ -54,14 +58,20 @@
       <div class="cuadro">
         <h2>🏆 Ranking</h2>
 
-        <h3>Por Puntaje</h3>
-        <ul id="rankingPuntaje"></ul>
-
-        <h3>Por Aciertos</h3>
-        <ul id="rankingAciertos"></ul>
-
-        <h3>Por Tiempo</h3>
-        <ul id="rankingTiempo"></ul>
+        <div class="columnas">
+          <div>
+            <h3>Por Puntaje</h3>
+            <ul id="rankingPuntaje"></ul>
+          </div>
+          <div>
+            <h3>Por Aciertos</h3>
+            <ul id="rankingAciertos"></ul>
+          </div>
+          <div>
+            <h3>Por Tiempo</h3>
+            <ul id="rankingTiempo"></ul>
+          </div>
+        </div>
 
         <div class="botones">
           <button type="button" onclick="reiniciarJuego()">
