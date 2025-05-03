@@ -2,6 +2,7 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Juego de Países</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
@@ -10,32 +11,44 @@
   <body>
     <div class="pantalla" id="pantalla-inicio" style="display: flex">
       <div class="cuadro">
-        <h1>¡Bienvenidos!</h1>
-        <p>Vamos a jugar y aprender sobre los países del mundo</p>
+        <h1>🌍 Juego de Países</h1>
+        <p>
+          ¿Cuánto sabes sobre los países del mundo? ¡Pon a prueba tu
+          conocimiento ahora!
+        </p>
 
-        <label for="nombreJugador">Ingresa tu nombre:</label>
         <input type="text" id="nombreJugador" placeholder="Tu nombre aquí" />
 
-        <button onclick="jugar()">Comenzar</button>
+        <div class="botones">
+          <button onclick="jugar()">Empezar</button>
+          <button onclick="mostrarRanking() ">Ver Ranking</button>
+        </div>
       </div>
     </div>
 
     <div class="pantalla" id="pantalla-juego">
       <div class="cuadro">
+        <h1>🌍 Juego de Países</h1>
         <div class="info-superior">
-          <span id="progreso">🟡 Pregunta 1 de 10</span>
+          <span id="progreso"> Pregunta 1 de 10</span>
         </div>
 
         <h2 id="pregunta"></h2>
         <div class="opciones"></div>
 
         <div id="respuesta"></div>
+        <div class="botones">
+          <button class="salir" onclick="salirDelJuego()">
+            Salir del juego
+          </button>
+        </div>
       </div>
     </div>
 
     <div class="pantalla" id="pantalla-resultados">
       <div class="cuadro">
-        <h2>Resultados de la partida</h2>
+        <h2>🌍 Resultados de la partida</h2>
+
         <p>✅ Correctas: <span id="resultado-correctas">0</span></p>
         <p>❌ Incorrectas: <span id="resultado-incorrectas">0</span></p>
         <p>
@@ -76,6 +89,9 @@
         <div class="botones">
           <button type="button" onclick="reiniciarJuego()">
             Volver al inicio
+          </button>
+          <button class="salir" onclick="salirDelJuego()">
+            Salir del juego
           </button>
         </div>
       </div>

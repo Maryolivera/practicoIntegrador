@@ -10,8 +10,9 @@ body {
   font-family: sans-serif;
 }
 
+/*fondo de cada pantalla*/
 .pantalla {
-  background: linear-gradient(to bottom, #a0d8ef, #e0f7fa);
+  background: linear-gradient(to bottom, #4facfe, #00f2fe);
   height: 100vh;
   width: 100vw;
   display: none;
@@ -31,46 +32,34 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.cuadro h1,
+/*titulo principal*/
+.cuadro h1 {
+  font-size: 2.5em;
+  color: #007bff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  margin-bottom: 20px;
+}
+
+/*subtitulos en cuadros*/
 .cuadro h2 {
   margin-bottom: 20px;
   font-size: 1.5em;
   color: #333;
-}
-
-.cuadro p {
-  margin: 10px 0;
-  font-size: 1.1em;
-}
-
-.botones,
-.opciones {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.botones,
-.respuesta {
-  margin-top: 10px;
-  font-size: 1.2em;
   font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 1em;
+/* campo de texto (nombre) */
+.cuadro input[type="text"] {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 20px;
   border-radius: 8px;
-  cursor: pointer;
+  border: 1px solid #ccc;
+  font-size: 1.3em;
 }
 
-button:hover {
-  background: #0056b3;
-}
-
+/*informacion superior*/
 .info-superior {
   display: flex;
   justify-content: space-between;
@@ -78,6 +67,56 @@ button:hover {
   font-weight: bold;
   color: #333;
 }
+
+@media (max-width: 600px) {
+  .info-superior {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 1em;
+  }
+}
+
+/*botones generales */
+button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2em;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0056b3;
+}
+
+/*contenedor de botones*/
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/*boton salir*/
+button.salir {
+  width: 60%;
+  padding: 10px;
+  font-size: 1em;
+  background: #cccccc;
+  color: #333;
+}
+button.salir:hover {
+  background: #bbbbbb;
+}
+
+/* estilos de opciones (pantalla de juego) */
+.opciones button {
+  margin: 8px 0;
+}
+
+/* ranking en columnas */
 
 .columnas {
   display: flex;
@@ -101,8 +140,8 @@ button:hover {
   border-radius: 5px;
   font-size: 16px;
   font-family: Arial, sans-serif;
-  display: flex; 
-  justify-content: space-between; 
+  display: flex;
+  justify-content: space-between;
 }
 
 .columnas h3 {
@@ -118,3 +157,45 @@ button:hover {
   }
 }
 
+/* ——— Pantalla de resultados ——— */
+#pantalla-resultados .cuadro h2 {
+  font-size: 2em;
+  color: #007bff;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#pantalla-resultados .cuadro p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #444;
+}
+
+#pantalla-resultados .botones button {
+  font-size: 1.2em;
+  padding: 12px;
+}
+
+#respuesta {
+  margin-top: 20px;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.botones button.salir {
+  background: #cccccc;
+  color: #333;
+
+  padding: 10px;
+  width: 60%;
+  font-size: 1em;
+  border-radius: 8px;
+  margin-top: 20px;
+}

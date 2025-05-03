@@ -10,7 +10,7 @@ let tiempoInicio;
 let tiempoTotal ;
 let numeroPregunta = 1;
 let puntajeTotal = 0;
-const totalPreguntas = 4;
+let totalPreguntas = 4;
 let nombreJugador = "";
 
 
@@ -45,6 +45,7 @@ async function jugar() {
   numeroPregunta = 1;
   puntajeTotal = 0;
   tiempoInicio = Date.now();
+
   await cargarPaises();
   mostrarPregunta();
 }
@@ -171,22 +172,25 @@ function pantallaResultados() {
 
 //Guarda los resultados y muestra el ranking 
 async function mostrarRanking() {
-  console.log('🔍 mostrarRanking ● datos a enviar:', {nombreJugador, puntajeTotal, correctas, tiempoTotal });
+  
   try {
     await fetch('guardarResultados', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({nombreJugador, puntajeTotal, correctas, tiempoTotal })
     });
+
     const res = await fetch('rankings');
     const data = await res.json();
     document.querySelectorAll('.pantalla').forEach(div => {
       div.style.display = 'none';
     });
+
     document.getElementById("pantalla-ranking").style.display = "flex";
     document.getElementById('rankingPuntaje').innerHTML = '';
     document.getElementById('rankingAciertos').innerHTML = '';
     document.getElementById('rankingTiempo').innerHTML = '';
+
     data.rankingPuntaje.forEach((item, i) => {
       const li = document.createElement('li');
       li.textContent = `#${i + 1} ${item.nombreJugador} : ${item.puntajeTotal}`;
@@ -216,5 +220,9 @@ function reiniciarJuego() {
   jugar();
 }
 
-
-
+//Sale del juego
+function salirDelJuego() {
+  if (confirm("¿Seguro que quieres salir del juego? Se perderá todo el progreso.")) {
+    location.reload();
+  }
+}
