@@ -19,7 +19,6 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-
 }
 
 /*  Cuadro central común a todas las pantallas */
@@ -206,6 +205,3 @@ button.salir:hover {
   overflow-y: auto;
   padding-right: 10px;
 }
-
-
-
