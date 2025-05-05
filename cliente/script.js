@@ -10,7 +10,7 @@ let tiempoInicio;
 let tiempoTotal ;
 let numeroPregunta = 1;
 let puntajeTotal = 0;
-let totalPreguntas = 4;
+let totalPreguntas = 10;
 let nombreJugador = "";
 
 
@@ -29,7 +29,7 @@ async function cargarPaises() {
   }
 }
 
-//Inicializa y comienza el juego
+//Inicia y comienza el juego
 async function jugar() {
   nombreJugador = document.getElementById('nombreJugador').value.trim();
   if (nombreJugador === "") {
@@ -37,9 +37,13 @@ async function jugar() {
     return;
   }
 
+//Oculta pantallas anteriore y muestra pantalla de juego
   document.getElementById("pantalla-inicio").style.display = "none";
   document.getElementById("pantalla-resultados").style.display = "none";
   document.getElementById("pantalla-juego").style.display = "flex";
+  
+  document.getElementById("pregunta").textContent = "⏳ Cargando pregunta...";
+ //Reinicia valores del juego
   correctas = 0;
   incorrectas = 0;
   numeroPregunta = 1;
@@ -50,7 +54,7 @@ async function jugar() {
   mostrarPregunta();
 }
 
-//Determina el tipo de pregunta y la muestra
+//Muestra una nueva pregunta según tipo aleatorio
 function mostrarPregunta() {
   if (numeroPregunta > totalPreguntas) {
     pantallaResultados();
@@ -66,12 +70,14 @@ function mostrarPregunta() {
   }
 }
 
-//Pregunta sobre la capital de un pais
+// Genera una pregunta sobre la capital del país
 function preguntaCapital() {
   const pais = paisesConCapital[Math.floor(Math.random() * paisesConCapital.length)];
   const nombrePais = pais.name.common;
   const capitalCorrecta = pais.capital[0];
   const opciones = [capitalCorrecta];
+
+  //Genera opciones incorrectas
   while (opciones.length < 4) {
     const aux = paisesConCapital[Math.floor(Math.random() * paisesConCapital.length)];
     const valor = aux.capital[0];
@@ -79,17 +85,21 @@ function preguntaCapital() {
       opciones.push(valor);
     }
   }
+
+  //Mezcla las opciones y muestra
   const mezcladas = opciones.sort(() => Math.random() - 0.5);
   document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
   document.getElementById("pregunta").textContent = `¿Cuál es la capital de ${nombrePais}?`;
   mostrarOpciones(mezcladas, capitalCorrecta, 3);
 }
 
-//Pregunta sobre la bandera de un pais
+//Genera una pregunta sobre la bandera de un país
 function preguntaBandera() {
   const pais = paisesConBandera[Math.floor(Math.random() * paisesConBandera.length)];
   const nombrePais = pais.name.common;
   const opciones = [nombrePais];
+
+// Genera opciones incorrectas
   while (opciones.length < 4) {
     const aux = paisesConBandera[Math.floor(Math.random() * paisesConBandera.length)]
     const valor = aux.name.common;
@@ -97,17 +107,21 @@ function preguntaBandera() {
       opciones.push(valor);
     }
   }
+  
+//Mezcla las opciones y muestra
   const mezcladas = opciones.sort(() => Math.random() - 0.5);
   document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
   document.getElementById("pregunta").innerHTML = `¿Qué país representa esta bandera?<br><img src="${pais.flags.svg}" alt="Bandera" style="width: 100px;">`;
   mostrarOpciones(mezcladas, nombrePais, 5);
 }
 
-//Pregunta sobre la cantidad de paises limitrofes
+// Genera una pregunta sobre países limítrofes
 function preguntaLimitrofes() {
   const pais = paisesConFronteras[Math.floor(Math.random() * paisesConFronteras.length)];
   const cantidadCorrecta = pais.borders.length;
   const opciones = [cantidadCorrecta];
+
+  //Genera opciones incorrectas
   while (opciones.length < 4) {
     const aux = paisesConFronteras[Math.floor(Math.random() * paisesConFronteras.length)];
     const cantidad = aux.borders.length;
@@ -115,6 +129,8 @@ function preguntaLimitrofes() {
       opciones.push(cantidad);
     }
   }
+
+//Mezcla las opciones y muestra
   const mezcladas = opciones.sort(() => Math.random() - 0.5);
   document.getElementById("progreso").textContent = `🟡 Pregunta ${numeroPregunta} de ${totalPreguntas}`;
   document.getElementById("pregunta").textContent = `¿Cuántos países limítrofes tiene ${pais.name.common}?`;
@@ -125,17 +141,21 @@ function preguntaLimitrofes() {
 function mostrarOpciones(opciones, correcta, valorPuntaje = 0) {
   const contenedor = document.querySelector(".opciones");
   contenedor.innerHTML = "";
+
   opciones.forEach(opcion => {
     const boton = document.createElement("button");
     boton.textContent = opcion;
+
+    // Al hacer clic en una opción se evalúa la respuesta
     boton.onclick = () => responder(opcion === correcta, correcta, valorPuntaje);
     contenedor.appendChild(boton);
   });
 }
 
-//Procesa la respuesta del usuario y actualiza los resultados 
+//Procesa la respuesta del jugador y actualiza los resultados 
 function responder(esCorrecta, correcta, valorPuntaje = 0) {
   const respuesta = document.getElementById("respuesta");
+
   if (esCorrecta) {
     respuesta.textContent = "✅ ¡Correcto!";
     correctas++;
@@ -144,7 +164,10 @@ function responder(esCorrecta, correcta, valorPuntaje = 0) {
     respuesta.textContent = `❌ Incorrecto. La respuesta era: ${correcta}`;
     incorrectas++;
   }
+
   numeroPregunta++;
+
+  // Muestra siguiente pregunta después de un breve retraso
   setTimeout(() => {
     respuesta.textContent = "";
     if (numeroPregunta > totalPreguntas) {
@@ -155,7 +178,7 @@ function responder(esCorrecta, correcta, valorPuntaje = 0) {
   }, 1500);
 }
 
-//Muestra la pantalla final con los resultados deljuego
+//Muestra la pantalla final con los resultados
 function pantallaResultados() {
   const tiempoFinal = Date.now();
   tiempoTotal = Math.floor((tiempoFinal - tiempoInicio) / 1000);
@@ -166,6 +189,7 @@ function pantallaResultados() {
   document.getElementById("resultado-tiempo-total").textContent = tiempoTotal;
   document.getElementById("resultado-tiempo-promedio").textContent = promedio;
   document.getElementById("resultado-puntaje-total").textContent = puntajeTotal;
+
   document.getElementById("pantalla-juego").style.display = "none";
   document.getElementById("pantalla-resultados").style.display = "flex";
 }
@@ -174,19 +198,25 @@ function pantallaResultados() {
 async function mostrarRanking() {
   
   try {
+    //Envia datos al servidor para guardar
     await fetch('guardarResultados', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({nombreJugador, puntajeTotal, correctas, tiempoTotal })
     });
 
+    //Obtiene los rankings actualizados
     const res = await fetch('rankings');
     const data = await res.json();
+
+    // Cambia a la pantalla de ranking
     document.querySelectorAll('.pantalla').forEach(div => {
       div.style.display = 'none';
     });
 
     document.getElementById("pantalla-ranking").style.display = "flex";
+
+    // Muestra rankings en las tres categorías
     document.getElementById('rankingPuntaje').innerHTML = '';
     document.getElementById('rankingAciertos').innerHTML = '';
     document.getElementById('rankingTiempo').innerHTML = '';
@@ -220,7 +250,7 @@ function reiniciarJuego() {
   jugar();
 }
 
-//Sale del juego
+//Sale del juego y recarga la pagina
 function salirDelJuego() {
   if (confirm("¿Seguro que quieres salir del juego? Se perderá todo el progreso.")) {
     location.reload();
