@@ -85,7 +85,16 @@
 
 ## VIDEO DEMOSTRATIVO
 
-    (Incluir enlace aquí antes de la entrega)
+    []()
+
+## Consideraciones sobre partidas simultáneas
+
+El juego está preparado para que múltiples jugadores puedan jugar en simultáneo desde distintos navegadores o dispositivos, ya que cada partida se gestiona de manera independiente en el cliente.
+
+Sin embargo, como el ranking se guarda localmente en un archivo (`ranking.json`), existe la posibilidad de que si varias partidas finalizan exactamente al mismo tiempo, puedan producirse solapamientos o pérdida de datos en el archivo de ranking. Para el uso previsto en este trabajo, esta situación es poco probable.
+
+En caso de querer ampliar el juego para uso  profesional, se recomienda migrar el ranking a una base de datos externa .
+
 
 ## AUTOR
 

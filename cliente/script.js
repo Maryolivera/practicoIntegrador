@@ -35,8 +35,16 @@ async function cargarPaises() {
 //Inicia y comienza el juego
 async function jugar() {
   nombreJugador = document.getElementById("nombreJugador").value.trim();
-  if (nombreJugador === "") {
-    alert("Por favor, ingresa tu nombre antes de comenzar.");
+
+  // Validar nombre
+  if (
+    !nombreJugador ||
+    nombreJugador.length < 2 ||
+    !/^[a-zA-Z\s]+$/.test(nombreJugador)
+  ) {
+    alert(
+      "Por favor, ingresa un nombre válido (solo letras, mínimo 2 caracteres)."
+    );
     return;
   }
 

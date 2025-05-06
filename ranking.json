@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "nombreJugador": "Belen",
+    "puntajeTotal": 14,
+    "correctas": 4,
+    "tiempoTotal": 48
+  },
+  {
+    "nombreJugador": "Ana",
+    "puntajeTotal": 22,
+    "correctas": 6,
+    "tiempoTotal": 39
+  },
+  {
+    "nombreJugador": "Carlos",
+    "puntajeTotal": 31,
+    "correctas": 7,
+    "tiempoTotal": 41
+  },
+  {
+    "nombreJugador": "Marti",
+    "puntajeTotal": 9,
+    "correctas": 2,
+    "tiempoTotal": 55
+  },
+  {
+    "nombreJugador": "Sofía",
+    "puntajeTotal": 27,
+    "correctas": 6,
+    "tiempoTotal": 38
+  },
+  {
+    "nombreJugador": "Pablo",
+    "puntajeTotal": 35,
+    "correctas": 8,
+    "tiempoTotal": 33
+  },
+  {
+    "nombreJugador": "Mary",
+    "puntajeTotal": 16,
+    "correctas": 4,
+    "tiempoTotal": 57
+  },
+  {
+    "nombreJugador": "Carlos",
+    "puntajeTotal": 6,
+    "correctas": 2,
+    "tiempoTotal": 45
+  },
+  {
+    "nombreJugador": "Julio",
+    "puntajeTotal": 22,
+    "correctas": 6,
+    "tiempoTotal": 41
+  }
+]
