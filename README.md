@@ -85,8 +85,9 @@
 
 ## VIDEO DEMOSTRATIVO
 
-    []()
+   [Ver video](https://youtu.be/F0xuAE1spWY)
 
+   
 ## Consideraciones sobre partidas simultáneas
 
 El juego está preparado para que múltiples jugadores puedan jugar en simultáneo desde distintos navegadores o dispositivos, ya que cada partida se gestiona de manera independiente en el cliente.
